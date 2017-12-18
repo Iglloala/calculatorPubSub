@@ -37,6 +37,8 @@ var Calculator = (function(objeto){
 		var paceEnMillas = parseFloat(tiempoEnMinutos/distanceInMiles);
 		paceSegundos = paceEnMillas*60;
 		var timePaceMiles = this.secondsToTime(paceSegundos);
+		// Publica el resultado del calculo
+		PubSub.publish("calcular/pace", {pace: [timePaceKm, timePaceMiles]});
 		// Y retorno los dos Time con el resultado
 		return [timePaceKm, timePaceMiles];
 	}
@@ -63,6 +65,8 @@ var Calculator = (function(objeto){
 		var paceEnKm = parseFloat(tiempoEnMinutos/distanceInKm);
 		var paceSegundos = paceEnKm*60;
 		var timePaceKm = this.secondsToTime(paceSegundos);
+		// Publica el resultado del calculo
+		PubSub.publish("calcular/pace", {pace: [timePaceKm, timePaceMiles]});
 		// Y retorno los dos Time con el resultado
 		return [timePaceKm, timePaceMiles];
 	}
@@ -130,6 +134,8 @@ var Calculator = (function(objeto){
 			mark: mark
 		}
 		arrayMarcas.push(obj);
+		// Publica el resultado
+		PubSub.publish('calcular/tiempos', {arrayMarcas: arrayMarcas});
 		return arrayMarcas;
 	}
 
@@ -147,27 +153,29 @@ var Calculator = (function(objeto){
 	objeto.tableTimeFromPacePerMile = function(pacePerMile, distanceInMiles, cutDistanceInYards){
 		var arrayMarcas = [];
 		var cutDistanceInMiles = this.imperialToMiles(this.yardsToImperial(cutDistanceInYards));
-		// Genera una marca por cada punto de corte durante el recorrido a la distancia
-		for (var distanciaAcumulada=0; distanciaAcumulada<=distanceInMiles; distanciaAcumulada += cutDistanceInMiles){
-			var distance = distanciaAcumulada;
-			var acumuladaImperial = this.milesToImperial(distanciaAcumulada);
+		// calcula los tiempos para las distancias intermedias
+		var distanciaAcumulada = cutDistanceInYards;
+		while (distanciaAcumulada<distanceInMiles*1760) {
+			var acumuladaImperial = this.milesToImperial(distanciaAcumulada/1760);
 			var mark = this.markFromPacePerMile(pacePerMile, acumuladaImperial);
 			obj = {
-				distance: this.milesToImperial(distance),
+				distance: acumuladaImperial,
 				mark: mark
 			}
 			arrayMarcas.push(obj);
+			// incrementa la distancia acumulada
+			distanciaAcumulada += cutDistanceInYards;
 		}
-		// Y genera una última marca con la posición final
-		var distance = this.milesToImperial(distance);
-		var mark = this.markFromPacePerMile(pacePerMile, distance);
+		// calcula el tiempo para la distancia final
+		mark = this.markFromPacePerMile(pacePerMile, this.milesToImperial(distanceInMiles));
 		obj = {
-			distance: distance,
+			distance:  this.milesToImperial(distanceInMiles),
 			mark: mark
 		}
 		arrayMarcas.push(obj);
+		// Publica el resultado
+		PubSub.publish('calcular/tiempos', {arrayMarcas: arrayMarcas});
 		return arrayMarcas;
-
 	}
 
 	// Aquí retorna el objeto

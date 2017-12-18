@@ -5,7 +5,52 @@
 	<title>test publisher/subscriber module</title>
 </head>
 <body>
-	<div id="wrapper-ppal"></div>
+	<div id="wrapper-ppal">
+		<h1>Calculadora de carreras</h1>
+		
+		<div>
+			<h3>Calcular el ritmo por km o milla:</h3>
+			<label for="campoDistanciaRitmo">Distancia: </label>
+			<input id='campoDistanciaRitmo' name="campoDistanciaRitmo" type="number" style="max-width: 6rem;">
+			<select id='tipoDistanciaRitmo'>
+				<option value="Kilómetros">Kilómetros</option>
+				<option value="Millas">Millas</option>
+			</select>
+			<br>
+			<label>Tiempo: </label>
+			<input id='horasTiempoRitmo' type="number" size="2" min="0" max="99" placeholder="hh" style="max-width: 2rem;">
+			:
+			<input id='minutosTiempoRitmo' type="number" size="2" maxlength="2" min="0" max="59" placeholder="mm" style="max-width: 2rem;">
+			:
+			<input id='segundosTiempoRitmo' type="number" size="2" maxlength="2" min="0" max="59" placeholder="ss" style="max-width: 2rem;">
+			<br>
+			<button id='btCalcularRitmo' type="button">Calcular ritmo</button>
+			<div id='resultadoRitmo'></div>
+		</div>
+
+		<div>
+			<h3>Calcular tiempos:</h3>
+			<label>Distancia total: </label>
+			<input id='campoDistanciaTiempos' type="number" name="campoDistanciaTotalTiempos" style="max-width: 6rem;">
+			<select id='tipoDistanciaTiempos'>
+				<option value="Kilómetros">Kilómetros</option>
+				<option value="Millas">Millas</option>
+			</select>
+			<br>
+			<label>Tu ritmo por kilómetro: </label>
+			<input id='horasTiempoTiempos' type="number" size="2" min="0" max="99" placeholder="hh" style="max-width: 2rem;">
+			:
+			<input id='minutosTiempoTiempos' type="number" size="2" min="0" max="59" placeholder="mm" style="max-width: 2rem;">
+			:
+			<input id='segundosTiempoTiempos' type="number" size="2" min="0" max="59" placeholder="ss" style="max-width: 2rem;">
+			<br>
+			<label>Distancia de corte en metros: </label>
+			<input id='distanciaCorteTiempos' style="max-width: 6rem;" type="number">
+			<br>
+			<button id='btCalcularTiempos' type="button">Calcular tiempos</button>
+			<div id="resultadoTiempos"></div>
+		</div>
+	</div>
 	<!-- Inclusión de scripts -->
 	<script src='js/pubsub.js'></script>
 	<script src='js/calculator.js'></script>
