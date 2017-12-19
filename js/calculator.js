@@ -117,7 +117,7 @@ var Calculator = (function(objeto){
 	objeto.tableTimeFromPacePerKm = function(pacePerKm, distanceInMeters, cutDistanceInMeters){
 		var arrayMarcas = [];
 		// Genera una marca por cada punto de corte durante el recorrido a la distancia
-		for (var distanciaAcumulada=0; distanciaAcumulada<=distanceInMeters; distanciaAcumulada += cutDistanceInMeters){
+		for (var distanciaAcumulada=cutDistanceInMeters; distanciaAcumulada<distanceInMeters; distanciaAcumulada += cutDistanceInMeters){
 			var distance = distanciaAcumulada;
 			var mark = this.markFromPacePerKm(pacePerKm, distanciaAcumulada);
 			obj = {

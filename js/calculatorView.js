@@ -24,14 +24,15 @@ var CalculatorView = (function(objeto){
 		return respuesta;
 	}
 
-	objeto.renderizarResultadoRitmo = function(tiempo){
-		var resultado = _2digits(tiempo.hours) + ":" + _2digits(tiempo.minutes) + ":" +_2digits(tiempo.seconds);
+	var _renderizarResultadoRitmo = function(datos){
 		var tipo = tipoDistanciaRitmo.value;
 		switch (tipo) {
 			case 'Kilómetros':
+				var resultado = _2digits(datos.pace[0].hours) + ":" + _2digits(datos.pace[0].minutes) + ":" +_2digits(datos.pace[0].seconds);
 				tipo = 'por kilómetro';
 				break;
 			case 'Millas':
+				var resultado = _2digits(datos.pace[1].hours) + ":" + _2digits(datos.pace[1].minutes) + ":" +_2digits(datos.pace[1].seconds);
 				tipo = 'por milla';
 				break;
 			default:
@@ -40,7 +41,8 @@ var CalculatorView = (function(objeto){
 		resultadoRitmo.innerHTML = "Tu ritmo  " + tipo + " es: " + resultado;
 	}
 
-	objeto.renderizarResultadoTiempos = function(arrayTiempos) {
+	var _renderizarResultadoTiempos = function(datos) {
+		var arrayTiempos = datos.arrayMarcas;
 		// Empiezo a construir la salida
 		var tablaResultados = document.createElement('table');
 		var filaCabeceraResultados = document.createElement('tr');
@@ -71,8 +73,6 @@ var CalculatorView = (function(objeto){
 					var imperialString = distance.miles + " millas, " + distance.yards + " yardas, " + distance.feet + " pies. ";
 					var distanciaAcumulada = imperialString;
 					break;
-				default:
-					// No hace nada x defecto
 			}
 			var tiempo = mark.hours+" horas, "+mark.minutes+" minutos, "+mark.seconds+" segundos.";
 			// - 
@@ -97,12 +97,8 @@ var CalculatorView = (function(objeto){
 	// Método init de la vista
 	objeto.init = function(){
 		// Aquí en principio irán los subscribe
-		var subscribePace = PubSub.subscribe("calcular/pace", function(datos){
-			console.log('Se ha disparado el subscribePace!');
-		});
-		var subscribeTiempos = PubSub.subscribe("calcular/tiempos", function(datos){
-			console.log('Se ha disparado el subscribeTiempos!');
-		});
+		var subscribePace = PubSub.subscribe("calcular/pace", _renderizarResultadoRitmo);
+		var subscribeTiempos = PubSub.subscribe("calcular/tiempos", _renderizarResultadoTiempos);
 	}
 	objeto.init();
 

@@ -60,7 +60,7 @@ var Calculator = (function(objeto){
 		var resto = totalPies%5280;
 		var convertedYards = Math.floor(resto/3);
 		resto = resto%3;
-		var convertedFeets = parseFloat(resto);
+		var convertedFeets = parseFloat(resto).toFixed(2);
 		var imperial = new objeto.Imperial(convertedMiles, convertedYards, convertedFeets);
 		return imperial;
 	}
@@ -79,7 +79,7 @@ var Calculator = (function(objeto){
 		var resto = totalPies%5280;
 		var convertedYards = Math.floor(resto/3);
 		resto = resto%3;
-		var convertedFeets = parseFloat(resto);
+		var convertedFeets = parseFloat(resto).toFixed(2);
 		var imperial = new objeto.Imperial(convertedMiles, convertedYards, convertedFeets);
 		return imperial;	
 	}
