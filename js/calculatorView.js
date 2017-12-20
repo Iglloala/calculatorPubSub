@@ -1,4 +1,7 @@
 var CalculatorView = (function(objeto){
+	// Genero una instancia de PubSub si no existe
+	var PubSub = PubSubSingleton.getInstance();
+	
 	// Capturo los elementos con los que tiene que interactuar la vista
 	// - Calcular Ritmo
 	var campoDistanciaRitmo = document.getElementById('campoDistanciaRitmo');

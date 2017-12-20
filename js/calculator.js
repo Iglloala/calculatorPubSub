@@ -1,5 +1,7 @@
 // MÓDULO Calculator
 var Calculator = (function(objeto){
+	// Genero una instancia de PubSub si no existe
+	var PubSub = PubSubSingleton.getInstance();
 
 	//Clase Time
 	 objeto.Time = function(hours, minutes, seconds){

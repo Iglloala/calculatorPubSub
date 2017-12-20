@@ -1,3 +1,5 @@
+// Genero una instancia de PubSubSingleton (si no existe)
+var PubSub = PubSubSingleton.getInstance();
 // Pillo los elementos susceptibles de disparar eventos:
 var btCalcularRitmo = document.getElementById('btCalcularRitmo');
 var btCalcularTiempos = document.getElementById('btCalcularTiempos');
