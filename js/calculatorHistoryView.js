@@ -87,7 +87,10 @@ var CalculatorHistoryView = (function(){
 
 		// Me creo una función auxiliar para pasar los tiempos a string
 		function _time2String(time){
-			var salida = time.hours + ":" + time.minutes + ":" + time.seconds;
+			var horas = (time.hours>9)?time.hours:'0'+time.hours;
+			var minutos = (time.minutes>9)?time.minutes:'0'+time.minutes;
+			var segundos = (time.seconds>9)?time.seconds:'0'+time.seconds;
+			var salida =  horas + ":" + minutos + ":" + segundos;
 			return salida;
 		}
 	}
