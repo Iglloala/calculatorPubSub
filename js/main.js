@@ -2,7 +2,7 @@
 var btCalcularRitmo = document.getElementById('btCalcularRitmo');
 var btCalcularTiempos = document.getElementById('btCalcularTiempos');
 var selectorTipoTiempos = document.getElementById('tipoDistanciaTiempos');
-
+var btActualizarHistorial = document.getElementById('btActualizarHistorial');
 // Evento para que se calcule el ritmo
 btCalcularRitmo.addEventListener('click', function(){
 	// Recoge los valores implicados
@@ -64,3 +64,8 @@ btCalcularTiempos.addEventListener('click', function(){
 			break;
 	}
 });
+
+// Evento para que se muestre (o actualize) el historial
+btActualizarHistorial.addEventListener('click', function(){
+	CalculatorHistoryView.actualizarHistorial();
+}) 
