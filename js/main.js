@@ -16,14 +16,31 @@ btCalcularRitmo.addEventListener('click', function(){
 		case "Kilómetros":
 			var tiempo = new Calculator.Time(horas, minutos, segundos);
 			var tiempoEnSegundos = Calculator.timeToSeconds(tiempo);
-			Calculator.paceInKm(tiempoEnSegundos, distancia);
+			var respuesta = Calculator.paceInKm(tiempoEnSegundos, distancia);
+			// Preparo un objeto objectHistory y llamo al método add de calculatorHistory
+			var ohType = 'pace';
+			var ohUnits = 'Km';
+			var ohPace = respuesta[0];
+			var ohDistance = distancia;
+			var ohMark = Calculator.secondsToTime(tiempoEnSegundos);
+			var objectHistory = new CalculatorHistory.objectHistory(ohType, ohUnits, ohPace, ohDistance, ohMark);
+			CalculatorHistory.add(objectHistory);
 			break;
 		case "Millas":
 			var tiempo = new Calculator.Time(horas, minutos, segundos);
 			var tiempoEnSegundos = Calculator.timeToSeconds(tiempo);
-			Calculator.paceInMiles(tiempoEnSegundos, distancia);
+			var respuesta = Calculator.paceInMiles(tiempoEnSegundos, distancia);
+			// Preparo un objeto objectHistory y llamo al método add de calculatorHistory
+			var ohType = 'pace';
+			var ohUnits = 'millas';
+			var ohPace = respuesta[1];
+			var ohDistance = distancia;
+			var ohMark = Calculator.secondsToTime(tiempoEnSegundos);
+			var objectHistory = new CalculatorHistory.objectHistory(ohType, ohUnits, ohPace, ohDistance, ohMark);
+			CalculatorHistory.add(objectHistory);
 			break;
 	}
+
 });
 
 // Evento para cuando se cambia el tipo de distancia en la calculadora de tiempos

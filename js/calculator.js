@@ -39,14 +39,6 @@ var Calculator = (function(objeto){
 		var timePaceMiles = this.secondsToTime(paceSegundos);
 		// Publica el resultado del calculo
 		PubSub.publish("calcular/pace", {pace: [timePaceKm, timePaceMiles]});
-		// Preparo un objeto objectHistory y llamo al método add de calculatorHistory
-		var ohType = 'pace';
-		var ohUnits = 'Km';
-		var ohPace = timePaceKm;
-		var ohDistance = distanceInKm;
-		var ohMark = this.secondsToTime(timeInSeconds);
-		var objectHistory = new CalculatorHistory.objectHistory(ohType, ohUnits, ohPace, ohDistance, ohMark);
-		CalculatorHistory.add(objectHistory);
 		// Y retorno los dos Time con el resultado
 		return [timePaceKm, timePaceMiles];
 	}
@@ -75,14 +67,6 @@ var Calculator = (function(objeto){
 		var timePaceKm = this.secondsToTime(paceSegundos);
 		// Publica el resultado del calculo
 		PubSub.publish("calcular/pace", {pace: [timePaceKm, timePaceMiles]});
-		// Preparo un objeto objectHistory y llamo al método add de calculatorHistory
-		var ohType = 'pace';
-		var ohUnits = 'millas';
-		var ohPace = timePaceKm;
-		var ohDistance = distanceInKm;
-		var ohMark = this.secondsToTime(timeInSeconds);
-		var objectHistory = new CalculatorHistory.objectHistory(ohType, ohUnits, ohPace, ohDistance, ohMark);
-		CalculatorHistory.add(objectHistory);
 		// Y retorno los dos Time con el resultado
 		return [timePaceKm, timePaceMiles];
 	}
